@@ -40,25 +40,9 @@ phases:
       Python35:
         python.version: '3.5'
         python.architecture: x64
-      # TODO remove `if` once Hosted VS2017 has Python 3.7
-    #   ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
-    #     Python37:
-    #       python.version: '3.7'
-    #       python.architecture: x64
-      # On Windows, test x86 builds
       Python36:
         python.version: '3.6'
         python.architecture: x64
-        Python27-x86:
-          python.version: '2.7'
-          python.architecture: x86
-        Python36-x86:
-          python.version: '3.6'
-          python.architecture: x86
-        # TODO change to 3.7 once Hosted VS2017 has Python 3.7
-        Python37-x86:
-          python.version: '>= 3.7.0-b2'
-          python.architecture: x86
 
   steps:
   - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
