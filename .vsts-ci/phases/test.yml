@@ -25,8 +25,8 @@ phases:
   - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
     - template: ./run-tests-windows.yml
 
-#   - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
-#     - template: ../steps/run-tests.yml
+  - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
+    - template: ./run-tests.yml
 
 # - phase: Test_Secondary
 #   displayName: Test Secondary

@@ -1,0 +1,4 @@
+phases:
+- template: phases/run-test.yml
+  parameters:
+    queue: Hosted Linux Preview
