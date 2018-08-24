@@ -12,6 +12,9 @@ phases:
       Python27:
         python.version: '2.7'
         python.architecture: x64
+      Python36:
+        python.version: '3.6'
+        python.architecture: x64
       ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
         # TODO remove once Hosted VS2017 has Python 3.7
         Python37:
@@ -25,28 +28,28 @@ phases:
 #   - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
 #     - template: ../steps/run-tests.yml
 
-- phase: Test_Secondary
-  displayName: Test Secondary
-  # Run after Test_Primary so we don't devour time and jobs if tests are going to fail
-  dependsOn: Test_Primary
+# - phase: Test_Secondary
+#   displayName: Test Secondary
+#   # Run after Test_Primary so we don't devour time and jobs if tests are going to fail
+#   dependsOn: Test_Primary
 
-  queue:
-    name: ${{ parameters.queue }}
-    parallel: 5
-    matrix:
-      Python34:
-        python.version: '3.4'
-        python.architecture: x64
-      Python35:
-        python.version: '3.5'
-        python.architecture: x64
-      Python36:
-        python.version: '3.6'
-        python.architecture: x64
+#   queue:
+#     name: ${{ parameters.queue }}
+#     parallel: 5
+#     matrix:
+#       Python34:
+#         python.version: '3.4'
+#         python.architecture: x64
+#       Python35:
+#         python.version: '3.5'
+#         python.architecture: x64
+#       Python36:
+#         python.version: '3.6'
+#         python.architecture: x64
 
-  steps:
-  - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
-    - template: ./run-tests-windows.yml
+#   steps:
+#   - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
+#     - template: ./run-tests-windows.yml
 
 #   - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
 #     - template: ../steps/run-tests.yml
