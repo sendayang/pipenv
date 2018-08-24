@@ -20,7 +20,7 @@ phases:
 
   steps:
   - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
-    - template: ../steps/run-tests-windows.yml
+    - template: ./run-tests-windows.yml
 
 #   - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
 #     - template: ../steps/run-tests.yml
@@ -46,7 +46,7 @@ phases:
 
   steps:
   - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
-    - template: ../steps/run-tests-windows.yml
+    - template: ./run-tests-windows.yml
 
 #   - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
 #     - template: ../steps/run-tests.yml
