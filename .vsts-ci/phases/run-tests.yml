@@ -7,7 +7,9 @@ steps:
 
 - template: ../steps/install-dependencies.yml
 
-- script: |
+- bash: |
+   mkdir -p "$AGENT_HOMEDIRECTORY/.virtualenvs"
+   mkdir -p "$WORKON_HOME"
    pip install certifi
    export GIT_SSL_CAINFO=$(python -m certifi)
    export LANG=C.UTF-8
