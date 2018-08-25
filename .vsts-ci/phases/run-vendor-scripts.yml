@@ -16,6 +16,6 @@ steps:
    python -m pip install --upgrade invoke requests parver
    python -m invoke vendoring.update
 
--bash: |
+- bash: |
    python -m pip install check-manifest
    check-manifest
