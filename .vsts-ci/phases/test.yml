@@ -50,10 +50,5 @@ phases:
 #     - template: ./run-tests-windows.yml
 
   - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
-    - bash: |
-         python -m pip install --upgrade invoke requests parver
-         python -m invoke vendoring.update
-    - bash: |
-         python -m pip install check-manifest
-         check-manifest
+    - template: ./run-vendor-scripts.yml
 
