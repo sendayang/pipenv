@@ -7,13 +7,10 @@ phases:
 
   queue:
     name: ${{ parameters.queue }}
-    parallel: 3
+    parallel: 4
     matrix:
       Python27:
         python.version: '2.7'
-        python.architecture: x64
-      Python36:
-        python.version: '3.6'
         python.architecture: x64
       ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
         # TODO remove once Hosted VS2017 has Python 3.7
@@ -39,16 +36,18 @@ phases:
 
   queue:
     name: ${{ parameters.queue }}
-    parallel: 2
+    parallel: 4
     matrix:
       Python36:
         python.version: '3.6'
         python.architecture: x64
 
   steps:
-#   - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
-#     - template: ./run-tests-windows.yml
+  - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
+    - template: ./run-tests-windows.yml
 
   - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
+    - template: ./run-tests.yml
     - template: ./run-vendor-scripts.yml
+    - template: ./run-manifest-check.yml
 

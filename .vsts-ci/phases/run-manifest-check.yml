@@ -8,10 +8,7 @@ steps:
 - template: ../steps/install-dependencies.yml
 
 - bash: |
-   mkdir -p "$AGENT_HOMEDIRECTORY/.virtualenvs"
-   mkdir -p "$WORKON_HOME"
-   pip install certifi
    export GIT_SSL_CAINFO=$(python -m certifi)
    export LANG=C.UTF-8
-   python -m pip install --upgrade invoke requests parver
-   python -m invoke vendoring.update
+   python -m pip install check-manifest
+   check-manifest

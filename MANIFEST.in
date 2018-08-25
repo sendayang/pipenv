@@ -4,7 +4,7 @@ include examples/Pipfil*
 recursive-include pipenv LICENSE LICENSE* *LICENSE* *COPYING* t32.exe t64.exe w32.exe w64.exe cacert.pem
 recursive-include pipenv *.cfg
 recursive-include pipenv/vendor *.c *.j2
-recursive-include pipenv *.md
+recursive-include pipenv *.md *.APACHE *.BSD
 include pipenv/patched/notpip/_vendor/vendor.txt
 include pipenv/patched/safety.zip pipenv/patched/patched.txt
 include pipenv/vendor/pipreqs/stdlib pipenv/vendor/pipreqs/mapping
