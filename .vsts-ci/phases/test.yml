@@ -50,7 +50,7 @@ phases:
 
   steps:
   - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
-    -  ${{ if eq(parameters.run_integration, 'true') }}:
+    - ${{ if eq(parameters.run_integration, 'true') }}:
       - template: ./run-tests-windows.yml
 
   - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
