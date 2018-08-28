@@ -1,6 +1,5 @@
 parameters:
   queue:
-  run_integration: ''
 
 phases:
 - phase: Test_Primary
@@ -22,6 +21,22 @@ phases:
         Python37:
           python.version: '>= 3.7'
           python.architecture: x64
+  steps:
+  - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
+    - template: ./run-tests-windows.yml
+
+  - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
+    - template: ./run-tests.yml
+
+- phase: Test_Secondary
+  displayName: Test python3.6
+  # Run after Test_Primary so we don't devour time and jobs if tests are going to fail
+  dependsOn: Test_Primary
+
+  queue:
+    name: ${{ parameters.queue }}
+    parallel: 4
+    matrix:
       Python36:
         python.version: '3.6'
         python.architecture: x64
@@ -32,22 +47,19 @@ phases:
   - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
     - template: ./run-tests.yml
 
-- phase: Test_Secondary
-  displayName: Coverage and Vendor
-  # Run after Test_Primary so we don't devour time and jobs if tests are going to fail
+- phase: Vendoring
+  displayname: Test vendoring scripts
   dependsOn: Test_Primary
 
   queue:
-    name: ${{ parameters.queue }}
+    name: Hosted Linux Preview
     parallel: 4
     matrix:
-      ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
-        Vendoring:
-          python.version: '>= 3.7'
-          python.architecture: x64'
+      Python37:
+        python.version: '>= 3.7'
+        python.architecture: x64
 
   steps:
-  - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
     - template: ./run-vendor-scripts.yml
     - template: ./run-manifest-check.yml
 
