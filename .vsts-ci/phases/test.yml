@@ -50,18 +50,14 @@ phases:
 - phase: Vendoring
   displayName: Test vendoring scripts
   dependsOn: Test_Primary
-
-  queue:
-  - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
-    name: ${{ parameters.queue }}
-    parallel: 4
-    matrix:
-      Python37:
-        python.version: '>= 3.7'
-        python.architecture: x64
+  queue: Hosted Linux Preview
+  parallel: 4
+  matrix:
+    Python37:
+      python.version: '>= 3.7'
+      python.architecture: x64
 
   steps:
-  - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
-    - template: ./run-vendor-scripts.yml
-    - template: ./run-manifest-check.yml
+  - template: ./run-vendor-scripts.yml
+  - template: ./run-manifest-check.yml
 
