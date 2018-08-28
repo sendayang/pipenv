@@ -5,6 +5,9 @@ recursive-include pipenv LICENSE LICENSE* *LICENSE* *COPYING* t32.exe t64.exe w3
 recursive-include pipenv *.cfg
 recursive-include pipenv/vendor *.c *.j2
 recursive-include pipenv *.md *.APACHE *.BSD
+recursive-include pipenv Makefile
+recursive-include pipenv/vendor vendor.txt
+recursive-include pipenv README
 include pipenv/patched/notpip/_vendor/vendor.txt
 include pipenv/patched/safety.zip pipenv/patched/patched.txt
 include pipenv/vendor/pipreqs/stdlib pipenv/vendor/pipreqs/mapping
