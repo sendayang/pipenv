@@ -22,7 +22,9 @@ phases:
         Python37:
           python.version: '>= 3.7'
           python.architecture: x64
-
+      Python36:
+        python.version: '3.6'
+        python.architecture: x64
   steps:
   - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
     - template: ./run-tests-windows.yml
@@ -39,24 +41,11 @@ phases:
     name: ${{ parameters.queue }}
     parallel: 4
     matrix:
-      Python36:
-        python.version: '3.6'
-        python.architecture: x64
-        run_integration: 'true'
       Vendoring:
         python.version: '3.7'
         python.architecture: x64'
-        run_integration: 'false'
 
   steps:
-  - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
-    - ${{ if eq(parameters.run_integration, 'true') }}:
-      - template: ./run-tests-windows.yml
-
-  - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
-    - ${{ if eq(parameters.run_integration, 'true') }}:
-      - template: ./run-tests.yml
-    - ${{ if ne(parameters.run_integration, 'true') }}:
-      - template: ./run-vendor-scripts.yml
-      - template: ./run-manifest-check.yml
+  - template: ./run-vendor-scripts.yml
+  - template: ./run-manifest-check.yml
 
