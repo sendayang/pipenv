@@ -52,10 +52,10 @@ phases:
   dependsOn: Test_Primary
 
   queue:
+  - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
     name: ${{ parameters.queue }}
     parallel: 4
     matrix:
-    - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
       Python37:
         python.version: '>= 3.7'
         python.architecture: x64
