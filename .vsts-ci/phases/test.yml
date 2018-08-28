@@ -50,12 +50,14 @@ phases:
 - phase: Vendoring
   displayName: Test vendoring scripts
   dependsOn: Test_Primary
-  queue: Hosted Linux Preview
-  parallel: 4
-  matrix:
-    Python37:
-      python.version: '>= 3.7'
-      python.architecture: x64
+  queue:
+    demands: agent.os -equals Linux
+    name: ${{ parameters.queue }}
+    parallel: 4
+    matrix:
+      Python37:
+        python.version: '>= 3.7'
+        python.architecture: x64
 
   steps:
   - template: ./run-vendor-scripts.yml
