@@ -48,7 +48,7 @@ phases:
     - template: ./run-tests.yml
 
 - phase: Vendoring
-  displayname: Test vendoring scripts
+  displayName: Test vendoring scripts
   dependsOn: Test_Primary
 
   queue:
