@@ -41,11 +41,13 @@ phases:
     name: ${{ parameters.queue }}
     parallel: 4
     matrix:
-      Vendoring:
-        python.version: '>= 3.7'
-        python.architecture: x64'
+      ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
+        Vendoring:
+          python.version: '>= 3.7'
+          python.architecture: x64'
 
   steps:
-  - template: ./run-vendor-scripts.yml
-  - template: ./run-manifest-check.yml
+  - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
+    - template: ./run-vendor-scripts.yml
+    - template: ./run-manifest-check.yml
 
