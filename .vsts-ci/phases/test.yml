@@ -42,7 +42,7 @@ phases:
     parallel: 4
     matrix:
       Vendoring:
-        python.version: '3.7'
+        python.version: '>= 3.7'
         python.architecture: x64'
 
   steps:
