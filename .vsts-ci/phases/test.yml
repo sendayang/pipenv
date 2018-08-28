@@ -1,5 +1,6 @@
 parameters:
   queue:
+  run_integration: ''
 
 phases:
 - phase: Test_Primary
@@ -41,13 +42,21 @@ phases:
       Python36:
         python.version: '3.6'
         python.architecture: x64
+        run_integration: 'true'
+      Vendoring:
+        python.version: '3.7'
+        python.architecture: x64'
+        run_integration: 'false'
 
   steps:
   - ${{ if eq(parameters.queue, 'Hosted VS2017') }}:
-    - template: ./run-tests-windows.yml
+    -  ${{ if eq(parameters.run_integration, 'true') }}:
+      - template: ./run-tests-windows.yml
 
   - ${{ if ne(parameters.queue, 'Hosted VS2017') }}:
-    - template: ./run-tests.yml
-    - template: ./run-vendor-scripts.yml
-    - template: ./run-manifest-check.yml
+    - ${{ if eq(parameters.run_integration, 'true') }}:
+      - template: ./run-tests.yml
+    - ${{ if ne(parameters.run_integration, 'true') }}:
+      - template: ./run-vendor-scripts.yml
+      - template: ./run-manifest-check.yml
 
